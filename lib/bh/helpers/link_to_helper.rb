@@ -35,19 +35,10 @@ module Bh
     #         end
     #       end
     def link_to(*args, &block)
-      active = false
-      if args.last.is_a?(Hash) && args.last.extractable_options?
-        active = args.last[:active]
-
-        # remove the unwanted active option
-        args.last.delete(:active)
-      end
-
-      if block_given?
-        if yield.is_a?(Hash) && yield.extractable_options?
-          active = yield[:active]
-        end
-      end
+      options = args.dup
+      options.shift unless block_given?
+      active = options.extract_options![:active]
+      args.last.delete(:active) if args.last.is_a?(Hash)
 
       link_to = Bh::LinkTo.new self, *args, &block
 
