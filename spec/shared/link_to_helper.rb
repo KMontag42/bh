@@ -48,7 +48,7 @@ shared_examples_for 'the link wrapped in nav' do
     before { allow_any_instance_of(Bh::LinkTo).to receive(:current_page?).and_return true }
 
     specify 'surrounds the link in a <li class="active"> item' do
-      html = '<li class="activ"><a href="/">content</a></li>'
+      html = '<li class="active"><a href="/">content</a></li>'
       bh.nav { expect(:link_to).to generate html }
     end
   end
