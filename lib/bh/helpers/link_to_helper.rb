@@ -44,7 +44,9 @@ module Bh
       end
 
       if block_given?
-        active = yield[:active]
+        if yield.is_a?(Hash) && yield.extractable_options?
+          active = yield[:active]
+        end
       end
 
       link_to = Bh::LinkTo.new self, *args, &block
