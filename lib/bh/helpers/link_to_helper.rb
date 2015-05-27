@@ -39,7 +39,7 @@ module Bh
         active = args.last[:active]
 
         # remove the unwanted active option
-        args.last.delete[:active]
+        args.last.delete(:active)
       end
 
       link_to = Bh::LinkTo.new self, *args, &block
