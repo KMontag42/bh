@@ -35,7 +35,8 @@ module Bh
     #         end
     #       end
     def link_to(*args, &block)
-      active = args.extract_options![:active]
+      active = args.last.is_a?(Hash) && last.extractable_options? ?
+        args.last[:active] : false
 
       # remove the unwanted active option
       args.extract_options!.except![:active]
